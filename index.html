@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>One Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .region {
+      flex: 1;
+      min-width: 250px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      color: #1a73e8;
+    }
+
+    h3 {
+      margin-top: 1rem;
+    }
+
+    button {
+      margin: 0.25rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+
+    #output {
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>One Generator</h1>
+
+  <p id="output"></p>
+
+  <div class="container">
+    <!-- LATAM -->
+    <div class="region">
+      <h2>LATAM</h2>
+      <h3>Brazil</h3>
+      
+        </select>
+            <button onclick="handleGenerate('CPF')">CPF</button>
+            <label for="cpf-state">State:</label>
+                <select id="cpf-state">
+                    <option value="random">Random</option>
+                    <option value="0">Rio Grande do Sul (RS)</option>
+                    <option value="1">Distrito Federal (DF)</option>
+                    <option value="1">Goiás (GO)</option>
+                    <option value="1">Mato Grosso (MT)</option>
+                    <option value="1">Mato Grosso do Sul (MS)</option>
+                    <option value="1">Tocantins (TO)</option>
+                    <option value="2">Amazonas (AM)</option>
+                    <option value="2">Pará (PA)</option>
+                    <option value="2">Acre (AC)</option>
+                    <option value="2">Amapá (AP)</option>
+                    <option value="2">Rondônia (RO)</option>
+                    <option value="2">Roraima (RR)</option>
+                    <option value="3">Ceará (CE)</option>
+                    <option value="3">Maranhão (MA)</option>
+                    <option value="3">Piauí (PI)</option>
+                    <option value="4">Pernambuco (PE)</option>
+                    <option value="4">Rio Grande do Norte (RN)</option>
+                    <option value="4">Paraíba (PB)</option>
+                    <option value="4">Alagoas (AL)</option>
+                    <option value="5">Bahia (BA)</option>
+                    <option value="5">Sergipe (SE)</option>
+                    <option value="6">Minas Gerais (MG)</option>
+                    <option value="7">Rio de Janeiro (RJ)</option>
+                    <option value="7">Espírito Santo (ES)</option>
+                    <option value="8">São Paulo (SP)</option>
+                    <option value="9">Paraná (PR)</option>
+                    <option value="9">Santa Catarina (SC)</option>
+                </select>
+      <br>
+      <button onclick="handleGenerate('CNPJ')">CNPJ</button>
+      <br>
+            <button onclick="handleGenerate('CEP')">CEP (Postal Code)</button>
+            
+                <label for="cep-state">Select State:</label>
+                    <select id="cep-state">
+                        <option value="random">Random</option>
+                        <option value="AC">Acre (AC)</option>
+                        <option value="AL">Alagoas (AL)</option>
+                        <option value="AM">Amazonas (AM)</option>
+                        <option value="AP">Amapá (AP)</option>
+                        <option value="BA">Bahia (BA)</option>
+                        <option value="CE">Ceará (CE)</option>
+                        <option value="DF">Distrito Federal (DF)</option>
+                        <option value="ES">Espírito Santo (ES)</option>
+                        <option value="GO">Goiás (GO)</option>
+                        <option value="MA">Maranhão (MA)</option>
+                        <option value="MG">Minas Gerais (MG)</option>
+                        <option value="MS">Mato Grosso do Sul (MS)</option>
+                        <option value="MT">Mato Grosso (MT)</option>
+                        <option value="PA">Pará (PA)</option>
+                        <option value="PB">Paraíba (PB)</option>
+                        <option value="PE">Pernambuco (PE)</option>
+                        <option value="PI">Piauí (PI)</option>
+                        <option value="PR">Paraná (PR)</option>
+                        <option value="RJ">Rio de Janeiro (RJ)</option>
+                        <option value="RN">Rio Grande do Norte (RN)</option>
+                        <option value="RO">Rondônia (RO)</option>
+                        <option value="RR">Roraima (RR)</option>
+                        <option value="RS">Rio Grande do Sul (RS)</option>
+                        <option value="SC">Santa Catarina (SC)</option>
+                        <option value="SE">Sergipe (SE)</option>
+                        <option value="SP">São Paulo (SP)</option>
+                        <option value="TO">Tocantins (TO)</option>
+                    </select>
+       
+        <p><small>Need More Postal Codes? <a href="https://geradornv.com.br/gerador-cep/" target="_blank">Click Here!</a></p></small>
+
+
+      <h3>Mexico</h3>
+      
+        <label for="rfc-day">Birth Day:</label>
+        <select id="rfc-day">...</select>
+
+        <label for="rfc-month">Month:</label>
+        <select id="rfc-month">...</select>
+
+        <label for="rfc-year">Year:</label>
+        <select id="rfc-year">...</select>
+
+<br>
+<br>
+
+      <button onclick="handleGenerate('RFC')">RFC</button>
+      <button onclick="handleGenerate('CURP')">CURP</button>
+
+
+      
+      
+      
+      <h3>Ecuador</h3>
+      <button onclick="handleGenerate('Cedula')">Cedula-ECU</button>
+      <button onclick="handleGenerate('RUC')">RUC</button>
+
+
+      <h3>Chile</h3>
+      <button onclick="handleGenerate('RUT')">RUT</button>
+
+      <h3>Colombia</h3>
+      <button onclick="handleGenerate('ColombiaCedula')">Cedula-COL</button>
+
+      <h3>Costa Rica</h3>
+      <button onclick="handleGenerate('CostaRicaCedula')">Cedula-CRI</button>
+      <button onclick="handleGenerate('DIMEX')">DIMEX</button>
+
+      <h3>El Salvador</h3>
+      <button onclick="handleGenerate('SVPersonalID')">DUI-Personal GovID</button>
+      <button onclick="handleGenerate('SVBusinessID')">Business GovID</button>
+      <button onclick="handleGenerate('SVTaxID')">Tax ID</button>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <!-- EMEA -->
+    <div class="region">
+      <h2>EMEA</h2>
+      <h3>Italy</h3>
+      <button onclick="handleGenerate('FiscalCode')">Fiscal Code</button>
+
+
+      <h3>India</h3>
+      <button onclick="handleGenerate('Aadhaar')">Aadhaar</button>
+      <button onclick="handleGenerate('PAN')">PAN</button>
+      <button onclick="handleGenerate('FHID')">FHID (Food Handlers)</button>
+      <button onclick="handleGenerate('GST')">GST (Goods/Service Tax)</button>
+
+
+      <h3>Israel</h3>
+      <button onclick="handleGenerate('IsraelTaxID')">TaxID</button>
+      <button onclick="handleGenerate('IsraelPostalCode')">Postal Code</button>
+
+      <h3>United Arab Emirates</h3>
+      <button onclick="handleGenerate('UAEEmiratesID')">Emirates ID</button>
+
+
+      <h3>Russia</h3>
+      <button onclick="handleGenerate('RUSTIN')">TIN (Passport)</button>
+      <button onclick="handleGenerate('RUSINN')">INN</button>
+
+
+
+
+    </div>
+
+
+
+    <!-- APAC -->
+    <div class="region">
+      <h2>APAC</h2>
+      <h3>Taiwan</h3>
+      <small><p>*Note: TWN has validation that will check if the Gov ID is real or not. Login to ST first to bypass validation.</small></p>
+      <button onclick="handleGenerate('NID')">NID (Identity Card)</button>
+
+      <h3>Japan</h3>
+      <button onclick="handleGenerate('JapanPostalCode')">Postal Code</button>
+
+      <h3>Australia</h3>
+      <button onclick="handleGenerate('AUSABN')">ABN</button>
+
+      <h3>New Zealand</h3>
+      <button onclick="handleGenerate('NZLIRD')">IRD</button>
+
+      <h3>Malaysia</h3>
+      <button onclick="handleGenerate('MYSGovID')">I/C ID</button>
+
+      <h3>Singapore</h3>
+      <button onclick="handleGenerate('SGPNRIC')">NRIC/PRID</button>
+      <button onclick="handleGenerate('SGPUENNine')">UEN (9-digit)</button>
+      <button onclick="handleGenerate('SGPUENTen')">UEN (10-digit)</button>
+      <button onclick="handleGenerate('SGPUENTenOther')">UEN (Other)</button>
+
+      <h3>Thailand</h3>
+      <button onclick="handleGenerate('THACitizenID')">Citizen ID</button>
+      <button onclick="handleGenerate('THATaxID')">Tax ID</button>
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+  
+
+  <script type="module" src="./main.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+<!-- Mexico Birthdate Script -->
+<script>
+  function populateRFCDateFields() {
+    const daySelect = document.getElementById('rfc-day');
+    const monthSelect = document.getElementById('rfc-month');
+    const yearSelect = document.getElementById('rfc-year');
+
+    for (let i = 1; i <= 31; i++) {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = i;
+      daySelect.appendChild(opt);
+    }
+
+    for (let i = 1; i <= 12; i++) {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = i;
+      monthSelect.appendChild(opt);
+    }
+
+    for (let y = 2007; y >= 1895; y--) {
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = y;
+      yearSelect.appendChild(opt);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', populateRFCDateFields);
+</script>
+
