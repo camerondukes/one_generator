@@ -33,10 +33,7 @@ const idGenerators = {
   SGPUENTenOther: () => import('./scripts/sgp_ids.js').then(m => m.generateSGPUENTenOther()),
   THACitizenID: () => import('./scripts/tha_ids.js').then(m => m.generateTHACitizenID()),
   THATaxID: () => import('./scripts/tha_ids.js').then(m => m.generateTHATaxID()),
-  UAEEmiratesID: () => import('./scripts/uae_emirates_id.js').then(m => m.generateUAEEmiratesID()),
-
-
-
+  UAEEmiratesID: () => import('./scripts/uae_id.js').then(m => m.generateUAEEmiratesID()),
 };
 
 export function handleGenerate(type) {
