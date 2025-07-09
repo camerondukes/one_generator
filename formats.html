@@ -1,0 +1,36 @@
+<!-- govid-formats.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GovID Formats</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
+</head>
+<body>
+  <h1>GovID Format Reference</h1>
+  <table>
+    <tr>
+      <th>Country</th>
+      <th>ID Type</th>
+      <th>Format</th>
+      <th>Algorithm</th>
+    </tr>
+    <tr><td>Brazil</td><td>CPF</td><td>NNNNNNNNNNN</td><td>✅</td></tr>
+    <tr><td>Brazil</td><td>CNPJ</td><td>NNNNNNNNNNNNNN</td><td>✅</td></tr>
+    <tr><td>Mexico</td><td>RFC</td><td>AAAA + YYMMDD + XXX</td><td>❌</td></tr>
+    <tr><td>Mexico</td><td>CURP</td><td>AAAA + YYMMDD + AAA + XXXXX</td><td>❌</td></tr>
+    <tr><td>USA</td><td>SSN</td><td>XXX-XX-XXXX</td><td>❌</td></tr>
+    <tr><td>Ecuador</td><td>Cédula</td><td>NNNNNNNNNN</td><td>✅</td></tr>
+    <tr><td>India</td><td>PAN</td><td>AAAAANNNNA</td><td>❌</td></tr>
+    <tr><td>Singapore</td><td>NRIC / PRID</td><td>ANNNNNNNA</td><td>❌</td></tr>
+    <tr><td>Israel</td><td>Tax ID</td><td>NNNNNNNNN</td><td>❌</td></tr>
+    <tr><td>Japan</td><td>Postal Code</td><td>NNN-NNNN</td><td>❌</td></tr>
+    <!-- Add all others similarly -->
+  </table>
+</body>
+</html>
