@@ -5,7 +5,7 @@ const idGenerators = {
   Cedula: () => import('./scripts/cedula.js').then(m => m.generateCedula()),
   RUC: () => import('./scripts/ruc.js').then(m => m.generateRUC()),
   FiscalCode: () => import('./scripts/fiscal_code.js').then(m => m.generateFiscalCode()),
-  NID: () => import('./scripts/nid.js').then(m => m.generateNID()),
+  NID: (options) => import('./scripts/nid.js').then(m => m.generateNID(options)),
   RFC: (dob) => import('./scripts/rfc.js').then(m => m.generateRFC(dob)),
   CURP: (dob) => import('./scripts/curp.js').then(m => m.generateCURP(dob)),
   RUT: () => import('./scripts/rut.js').then(m => m.generateRUT()),
@@ -34,6 +34,9 @@ const idGenerators = {
   THACitizenID: () => import('./scripts/tha_ids.js').then(m => m.generateTHACitizenID()),
   THATaxID: () => import('./scripts/tha_ids.js').then(m => m.generateTHATaxID()),
   UAEEmiratesID: () => import('./scripts/uae_id.js').then(m => m.generateUAEEmiratesID()),
+
+
+
 };
 
 export function handleGenerate(type) {
@@ -95,12 +98,44 @@ export function handleGenerate(type) {
     return;
   }
 
+    //Taiwan NID
+if (type === 'NID') {
+  const output = document.getElementById('output');
+
+  const city = document.getElementById('twn-city')?.value;
+  const gender = document.querySelector('input[name="twn-gender"]:checked')?.value;
+
+  if (!city || !gender) {
+    output.style.color = 'red';
+    output.innerText = 'Please select both city and gender.';
+    return;
+  }
+
+  const options = { city, gender: parseInt(gender) };
+
+  const generator = idGenerators[type]; // Get the function AFTER checking type
+  if (!generator) {
+    output.style.color = 'red';
+    output.innerText = `No generator found for ${type}`;
+    return;
+  }
+
+  generator(options).then(id => {
+    output.style.color = 'black';
+    output.innerText = `Generated TWN ID: ${id}`;
+  });
+
+  return;
+}
+
+
   // Fallback: default generator
   generator().then(id => {
     output.style.color = 'black';
     output.innerText = `Generated ${type}: ${id}`;
   });
-}
 
+
+}
 
 window.handleGenerate = handleGenerate;
