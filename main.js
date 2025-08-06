@@ -42,100 +42,82 @@ const idGenerators = {
 export function handleGenerate(type) {
   // Instantly scroll to the top on-click
   window.scrollTo(0, 0);
-  const generator = idGenerators[type];
+  const generatorFn = idGenerators[type];
   const output = document.getElementById('output');
 
-  if (!generator) {
+  if (!generatorFn) {
     output.style.color = 'red';
     output.innerText = `No generator found for ${type}`;
     return;
   }
 
-  // CPF
-  if (type === 'CPF') {
-    let regionDigit = document.getElementById('cpf-state').value;
-    if (regionDigit === 'random') {
-      regionDigit = Math.floor(Math.random() * 10).toString();
-    }
-    generator(regionDigit).then(id => {
-      output.style.color = 'black';
-      output.innerText = `Generated CPF: ${id}`;
-    });
-    return;
+  // Helper to handle promise rejections
+  function runGenerator(promise) {
+    promise
+      .then(id => {
+        output.style.color = 'black';
+        output.innerText = `Generated ${type}: ${id}`;
+      })
+      .catch(err => {
+        console.error(err);
+        output.style.color = 'red';
+        output.innerText = 'Whoops, there was an error with that generator! Please try again later';
+      });
   }
 
-  // CEP
-  if (type === 'CEP') {
-    let uf = document.getElementById('cep-state').value;
-    if (uf === 'random') {
-      uf = 'random';
-    }
-    generator(uf).then(code => {
-      output.style.color = 'black';
-      output.innerText = `Generated CEP: ${code}`;
-    });
-    return;
-  }
-
-  // RFC and CURP - both use the same birthdate fields
-  if (type === 'RFC' || type === 'CURP') {
-    const year = document.getElementById('rfc-year').value;
-    const month = document.getElementById('rfc-month').value;
-    const day = document.getElementById('rfc-day').value;
-
-    if (!year || !month || !day) {
-      output.style.color = 'red';
-      output.innerText = 'Need to enter Birthdate to generate ' + type;
+  try {
+    // CPF
+    if (type === 'CPF') {
+      let regionDigit = document.getElementById('cpf-state').value;
+      if (regionDigit === 'random') regionDigit = Math.floor(Math.random() * 10).toString();
+      runGenerator(generatorFn(regionDigit));
       return;
     }
 
-    const dob = { year, month, day };
+    // CEP
+    if (type === 'CEP') {
+      let uf = document.getElementById('cep-state').value;
+      if (uf === 'random') uf = 'random';
+      runGenerator(generatorFn(uf));
+      return;
+    }
 
-    generator(dob).then(code => {
-      output.style.color = 'black';
-      output.innerText = `Generated ${type}: ${code}`;
-    });
-    return;
-  }
+    // RFC / CURP
+    if (type === 'RFC' || type === 'CURP') {
+      const year  = document.getElementById('rfc-year').value;
+      const month = document.getElementById('rfc-month').value;
+      const day   = document.getElementById('rfc-day').value;
+      if (!year || !month || !day) {
+        output.style.color = 'red';
+        output.innerText = `Need to enter Birthdate to generate ${type}`;
+        return;
+      }
+      runGenerator(generatorFn({ year, month, day }));
+      return;
+    }
 
-    //Taiwan NID
-if (type === 'NID') {
-  const output = document.getElementById('output');
+    // Taiwan NID
+    if (type === 'NID') {
+      const city   = document.getElementById('twn-city')?.value;
+      const gender = document.querySelector('input[name="twn-gender"]:checked')?.value;
+      if (!city || !gender) {
+        output.style.color = 'red';
+        output.innerText = 'Please select both city and gender.';
+        return;
+      }
+      runGenerator(generatorFn({ city, gender: parseInt(gender) }));
+      return;
+    }
 
-  const city = document.getElementById('twn-city')?.value;
-  const gender = document.querySelector('input[name="twn-gender"]:checked')?.value;
-
-  if (!city || !gender) {
+    // Fallback for simple generators
+    runGenerator(generatorFn());
+  } catch (err) {
+    // catch any sync errors
+    console.error(err);
     output.style.color = 'red';
-    output.innerText = 'Please select both city and gender.';
-    return;
+    output.innerText = 'Whoops, there was an error with that generator! Please try again later';
   }
-
-  const options = { city, gender: parseInt(gender) };
-
-  const generator = idGenerators[type]; // Get the function AFTER checking type
-  if (!generator) {
-    output.style.color = 'red';
-    output.innerText = `No generator found for ${type}`;
-    return;
-  }
-
-  generator(options).then(id => {
-    output.style.color = 'black';
-    output.innerText = `Generated TWN ID: ${id}`;
-  });
-
-  return;
-}
-
-
-  // Fallback: default generator
-  generator().then(id => {
-    output.style.color = 'black';
-    output.innerText = `Generated ${type}: ${id}`;
-  });
-
-
 }
 
 window.handleGenerate = handleGenerate;
+
