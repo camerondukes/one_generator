@@ -44,11 +44,31 @@
       cursor: pointer;
     }
 
-    #output {
+    #output-container {
       margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
       font-weight: bold;
       font-size: 1.2em;
       text-align: center;
+    }
+
+    #copy-button {
+      display: none;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.9em;
+    }
+
+    #copy-button.visible {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    #copy-button.copied {
+      color: #1b8f3a;
     }
   </style>
 </head>
@@ -61,7 +81,10 @@
 
   <h1>One Generator</h1>
 
-  <p id="output"></p>
+  <div id="output-container">
+    <span id="output"></span>
+    <button id="copy-button" type="button">Copy &#x29C9;</button>
+  </div>
 
   <div class="container">
     <!-- LATAM -->
@@ -339,5 +362,4 @@
 
   document.addEventListener('DOMContentLoaded', populateRFCDateFields);
 </script>
-
 
