@@ -44,10 +44,13 @@ export function handleGenerate(type) {
   window.scrollTo(0, 0);
   const generatorFn = idGenerators[type];
   const output = document.getElementById('output');
+  const copyButton = document.getElementById('copy-button');
+  const copyIcon = copyButton ? copyButton.dataset.icon || copyButton.innerText : '';
 
   if (!generatorFn) {
     output.style.color = 'red';
     output.innerText = `No generator found for ${type}`;
+    if (copyButton) copyButton.classList.remove('visible');
     return;
   }
 
@@ -57,11 +60,18 @@ export function handleGenerate(type) {
       .then(id => {
         output.style.color = 'black';
         output.innerText = `Generated ${type}: ${id}`;
+        if (copyButton) {
+          copyButton.dataset.value = id;
+          copyButton.classList.remove('copied');
+          copyButton.innerText = copyIcon;
+          copyButton.classList.add('visible');
+        }
       })
       .catch(err => {
         console.error(err);
         output.style.color = 'red';
         output.innerText = 'Whoops, there was an error with that generator! Please try again later';
+        if (copyButton) copyButton.classList.remove('visible');
       });
   }
 
@@ -90,6 +100,7 @@ export function handleGenerate(type) {
       if (!year || !month || !day) {
         output.style.color = 'red';
         output.innerText = `Need to enter Birthdate to generate ${type}`;
+        if (copyButton) copyButton.classList.remove('visible');
         return;
       }
       runGenerator(generatorFn({ year, month, day }));
@@ -103,6 +114,7 @@ export function handleGenerate(type) {
       if (!city || !gender) {
         output.style.color = 'red';
         output.innerText = 'Please select both city and gender.';
+        if (copyButton) copyButton.classList.remove('visible');
         return;
       }
       runGenerator(generatorFn({ city, gender: parseInt(gender) }));
@@ -116,8 +128,31 @@ export function handleGenerate(type) {
     console.error(err);
     output.style.color = 'red';
     output.innerText = 'Whoops, there was an error with that generator! Please try again later';
+    if (copyButton) copyButton.classList.remove('visible');
   }
 }
 
 window.handleGenerate = handleGenerate;
 
+const copyButton = document.getElementById('copy-button');
+if (copyButton) {
+  if (!copyButton.dataset.icon) {
+    copyButton.dataset.icon = copyButton.innerText;
+  }
+  const copyIcon = copyButton.dataset.icon;
+  copyButton.addEventListener('click', async () => {
+    const value = copyButton.dataset.value || '';
+    if (!value) return;
+    try {
+      await navigator.clipboard.writeText(value);
+      copyButton.innerText = '✓';
+      copyButton.classList.add('copied');
+      setTimeout(() => {
+        copyButton.innerText = copyIcon;
+        copyButton.classList.remove('copied');
+      }, 1200);
+    } catch (err) {
+      console.error(err);
+    }
+  });
+}
